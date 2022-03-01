@@ -1,0 +1,17 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  -docker build -t alex/complex -f ./clinet/Dockerfile.dev .
+
+script:
+  - docker run -e CI=true alex/complex npm test -- --coverage
+
+after_success:
+  - docker build -t alex/multi-client ./client
+  - docker build -t alex/multi-nginx ./nginx
+  - docker build -t alex/multi-server ./server
+  - docker build -t alex/multi-worker ./worker
