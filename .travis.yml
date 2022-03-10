@@ -12,6 +12,7 @@ script:
 
 after_success:
   - docker build -t alex/multi-client ./client
+  - docker build -t alex/multi-client2 ./client2
   - docker build -t alex/multi-nginx ./nginx
   - docker build -t alex/multi-server ./server
   - docker build -t alex/multi-worker ./worker
@@ -20,6 +21,8 @@ after_success:
   # Take those images and push them to docker hub
   - docker tag alex/multi-client savaonu/multi-client
   - docker push savaonu/multi-client
+  - docker tag alex/multi-client2 savaonu/multi-client2
+  - docker push savaonu/multi-client2
   - docker tag alex/multi-nginx savaonu/multi-nginx
   - docker push savaonu/multi-nginx
   - docker tag alex/multi-server savaonu/multi-server
